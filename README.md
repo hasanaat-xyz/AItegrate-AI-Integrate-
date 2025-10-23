@@ -1,1 +1,1 @@
-# AItegrate-AI-Integrate-
+# AItegrate [AI-Integrate]
