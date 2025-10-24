@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Gemini Project</title>
+</head>
+<body>
+  <h2>Ask Gemini</h2>
+  <textarea id="prompt" rows="4" cols="50" placeholder="Type your prompt here..."></textarea><br>
+  <button id="sendBtn">Send</button>
+
+  <h3>Reply:</h3>
+  <pre id="reply"></pre>
+
+  <script>
+    const btn = document.getElementById("sendBtn");
+    const promptBox = document.getElementById("prompt");
+    const replyBox = document.getElementById("reply");
+
+    btn.addEventListener("click", async () => {
+      const prompt = promptBox.value.trim();
+      if(!prompt) return alert("Enter a prompt");
+
+      replyBox.textContent = "Loading...";
+
+      try {
+        const response = await fetch("http://localhost:5000/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await response.json();
+        replyBox.textContent = data.reply || data.error;
+      } catch (err) {
+        replyBox.textContent = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
