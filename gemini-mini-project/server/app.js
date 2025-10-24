@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-const API_KEY = "AIzaSyA58DzIGLJ7SE4NUHzyLFNa776Ind8aELM"; 
+const API_KEY = "AIzaSyA58DzIGLJ7SE4NUHzyLFNa776Ind8aELM";
 app.post("/ask", async (req, res) => {
   const { prompt } = req.body;
   if (!prompt) return res.status(400).json({ error: "Prompt is required" });
@@ -26,8 +26,8 @@ app.post("/ask", async (req, res) => {
       }
     );
     const reply = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!reply) return res.status(500).json({ error: "No reply from Gemini API" });
+    if (!reply)
+      return res.status(500).json({ error: "No reply from Gemini API" });
     res.json({ reply });
   } catch (err) {
     console.error("Error:", err.response?.data || err.message);
@@ -35,4 +35,6 @@ app.post("/ask", async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("✅ Server running on http://localhost:5000"));
+app.listen(5000, () =>
+  console.log("✅ Server running on http://localhost:5000")
+);
