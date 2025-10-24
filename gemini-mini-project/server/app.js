@@ -12,7 +12,6 @@ const API_KEY = "AIzaSyA58DzIGLJ7SE4NUHzyLFNa776Ind8aELM";
 app.post("/ask", async (req, res) => {
   const { prompt } = req.body;
   if (!prompt) return res.status(400).json({ error: "Prompt is required" });
-
   try {
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
