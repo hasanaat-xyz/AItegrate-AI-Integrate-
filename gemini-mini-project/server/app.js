@@ -8,7 +8,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 const API_KEY = "AIzaSyA58DzIGLJ7SE4NUHzyLFNa776Ind8aELM"; 
-
 app.post("/ask", async (req, res) => {
   const { prompt } = req.body;
   if (!prompt) return res.status(400).json({ error: "Prompt is required" });
